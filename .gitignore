@@ -102,3 +102,15 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Snyk
+.dccache
+
+# MacOS
+.DS_Store
+
+# ESlint
+.lint-reports
+
+# Coverage
+.test-reports

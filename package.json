@@ -1,0 +1,66 @@
+{
+  "name": "nostr-ts-bot",
+  "version": "1.0.0",
+  "description": "A Nostr bot written in Typescript",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "node -r ts-node/register src/index.ts",
+    "clean": "rimraf ./{dist,.nyc_output,.test-reports,.coverage,.lint-reports}",
+    "build": "tsc --project tsconfig.build.json",
+    "prestart": "npm run build",
+    "start": "cd dist && node index.js",
+    "build:check": "npm run build -- --noEmit",
+    "lint": "eslint --ext .ts ./src ./test",
+    "lint:report": "npm run lint -- -o .lint-reports/report.json -f json",
+    "lint:fix": "npm run lint -- --fix",
+    "pretest:unit": "mkdir -p .test-reports/unit",
+    "test:unit": "mocha 'test/**/*.spec.ts'",
+    "test:unit:watch": "npm run test:unit -- --min --watch --watch-files src/**/*,test/**/*",
+    "cover:unit": "nyc --report-dir .coverage/unit npm run test:unit",
+    "pretest:integration": "mkdir -p .test-reports/integration",
+    "test:integration": "cucumber-js",
+    "cover:integration": "nyc --report-dir .coverage/integration npm run test:integration -- -p cover",
+    "docker:build": "docker build -t nostr-ts-bot .",
+    "docker:start": "docker run --rm --name nostr-ts-bot nostr-ts-bot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cameri/nostr-ts-bot.git"
+  },
+  "keywords": [
+    "nostr",
+    "bot"
+  ],
+  "author": "Ricardo Arturo Cabral Mejía (Cameri)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cameri/nostr-ts-bot/issues"
+  },
+  "homepage": "https://github.com/Cameri/nostr-ts-bot#readme",
+  "dependencies": {
+    "@types/mocha": "10.0.1",
+    "@types/node": "18.11.10",
+    "debug": "4.3.4",
+    "mocha": "10.1.0",
+    "ws": "8.11.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "8.9.0",
+    "@types/debug": "4.1.7",
+    "@types/ws": "8.5.3",
+    "@typescript-eslint/eslint-plugin": "5.45.0",
+    "eslint": "8.29.0",
+    "nyc": "15.1.0",
+    "rimraf": "3.0.2",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.3"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7",
+    "utf-8-validate": "^5.0.10"
+  }
+}
