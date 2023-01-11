@@ -1,2 +1,2 @@
-# nostr-ts-bot
-Nostr Typescript Bot
+# tnsor
+A Nostr Bot Framework written in TypeScript
